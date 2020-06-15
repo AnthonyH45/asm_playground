@@ -1,5 +1,5 @@
-; nasm -f elf hello32.asm && ld -m elf_i386 -s hello32.o && ./a.out
-    global _start               ; like main(), needed for linker (ld)
+; nasm -f elf hello32.asm && ld -m elf_i386 hello32.o && ./a.out
+    global _start           ; like main(), needed for linker (ld)
     
     section .text
 _start:                     ; begin procedure, tells teh linker this is the entry point

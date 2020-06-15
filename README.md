@@ -15,7 +15,7 @@ For 64 bit
 
 For 32 bit
 
-`nasm -f elf <name>.asm && ld -m elf_i386 -s <name>.o && ./a.out`
+`nasm -f elf <name>.asm && ld -m elf_i386 <name>.o && ./a.out`
 
 # following these: 
 - http://asm.sourceforge.net/intro/Assembly-Intro.html

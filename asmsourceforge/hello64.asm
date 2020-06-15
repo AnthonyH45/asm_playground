@@ -1,5 +1,5 @@
 ; nasm -f elf64 hello64.asm && ld hello64.o && ./a.out
-    global _start               ; like main(), needed for linker (ld)
+    global _start           ; like main(), needed for linker (ld)
     
     section .text
 _start:                     ; begin procedure, tells teh linker this is the entry point

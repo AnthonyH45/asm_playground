@@ -3,3 +3,13 @@
 
 a.out
 ./*/a.out
+
+.gdb*
+./*/.gdb*
+./*/*/.gdb*
+
+*peda*
+./*peda*
+./*/*peda*
+./*/*/*peda*
+x86/asmtutor/.gdb_history

@@ -19,6 +19,8 @@ _start:
 
     mov eax, sinput
     call sprint
+    
+    jmp end
 
 valid_input:
     push ecx
@@ -28,17 +30,15 @@ valid_input:
     xor ecx, ecx
 
     check_two_digits:
-        mov eax, sinput
-        cmp eax, 0x0
-        jz no_num
+        mov al, [sinput+ecx]
 
-        sub eax, 0x2F
-        cmp eax, 0x0
+        sub al, 0x2F
+        cmp al, 0x0
         jle no_num
 
-        mov eax, sinput
-        sub eax, 0x3A
-        cmp eax, 0x0
+        mov al, [sinput+ecx]
+        sub al, 0x3A
+        cmp al, 0x0
         jge no_num
 
         inc ecx
@@ -49,6 +49,7 @@ valid_input:
     valid:
     pop eax
     pop ecx
+    ret
 
 no_num:
     mov eax, msg_err

@@ -17,6 +17,10 @@ For 32 bit x86
 
 `nasm -f elf <name>.asm && ld -m elf_i386 <name>.o && ./a.out && rm -f a.out <name>.o`
 
+# Debug
+
+For debugging, I use gdb-peda as I find it very difficult to use gdb or debug in general without seeing the registers and stack with the current instructions. You can find the peda extension here: https://github.com/longld/peda
+
 # Note for ARM
 Since I am on x86_64 (shown when running `uname -m`), ARM will not work, so instead of using vagrant or VirtualBox, I'd rather have a lightweight solution, so I am using docker. Following this
 

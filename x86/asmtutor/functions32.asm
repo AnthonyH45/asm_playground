@@ -44,8 +44,8 @@ sprint:
     int 80h             ; now it 
 
     pop ebx             ; pop the top stack element into ebx
-    pop ecx             ; pop the top stack element into ebx
-    pop edx             ; pop the top stack element into ebx
+    pop ecx             ; pop the top stack element into ecx
+    pop edx             ; pop the top stack element into edx
     ret                 ; return, val in eax
 
 ;-----------------------------------------

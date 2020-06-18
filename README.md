@@ -11,11 +11,11 @@ syntax unless stated otherwise (ie AT&T, GNU AS or other)
 
 For 64 bit x86_64
 
-`nasm -f elf64 <name>.asm && ld <name>.o && ./a.out && rm -f a.out <name>.o`
+`nasm -g -f elf64 <name>.asm && ld <name>.o && ./a.out && rm -f a.out <name>.o`
 
 For 32 bit x86
 
-`nasm -f elf <name>.asm && ld -m elf_i386 <name>.o && ./a.out && rm -f a.out <name>.o`
+`nasm -g -f elf <name>.asm && ld -m elf_i386 <name>.o && ./a.out && rm -f a.out <name>.o`
 
 # Debug
 

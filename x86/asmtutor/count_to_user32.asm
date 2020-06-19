@@ -145,7 +145,7 @@ end:
 
     section .data
 msg1    db 'Please enter a two digit number (0x) if single digit: ',0x0
-msg_err db 'You did not enter two digits, please try again',0xa
+msg_err db 'You did not enter two digits, please try again',0xa,0x0
 msg2    db 'Counting down from ',0x0
 newline db '',0xa,0x0
 sinput  db 1

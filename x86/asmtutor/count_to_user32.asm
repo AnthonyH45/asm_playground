@@ -96,7 +96,7 @@ count_to:
         mov eax, ecx
 
         cmp eax, 0xA
-        call two_digit_print
+        jge two_digit_print
 
         add eax, 0x30
         push eax

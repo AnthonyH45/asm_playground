@@ -49,6 +49,20 @@ sprint:
     ret                 ; return, val in eax
 
 ;-----------------------------------------
+; void sprintLF(String message)
+; String printing with line feed function
+sprintLF:
+    call sprint
+    push rax            ; push eax onto stack
+    mov rax, 0xa        ; move 0xa into eax
+    push rax            ; push the linefeed onto the stack
+    mov rax, rsp        ; eax = stack pointer
+    call sprint         ; print esp=>eax
+    pop rax             ; pop top stack into eax
+    pop rax             ; pop top into eax
+    ret                 ; return
+
+;-----------------------------------------
 ; void exit()
 ; Exit program and restore resources
 quit:

@@ -62,6 +62,86 @@ no_num:
     call sprint
     jmp end
 
+count_to:
+    push rax                        ; save rax onto the stack
+    push rbx                        ; save rbx onto the stack
+    push rcx                        ; save rcx onto the stack
+    push rdx                        ; save rdx onto the stack
+
+    xor rax, rax                    ; rax = 0
+    xor rbx, rbx                    ; rbx = 0
+    xor rcx, rcx                    ; rcx = 0
+    xor rdx, rdx                    ; rdx = 0
+
+    mov al, [sinput+rcx]            ; al = *(sinput+rcx), grab first digit
+    sub al, 0x30                    ; al = al - 0x30 (get the numerical val of ascii char)
+    mov bl, 0xA                     ; bl = 0xA
+
+    first_digit:
+        add bl, 0xA                 ; bl = bl + 0xA
+        dec al                      ; al -= 1
+        cmp al, 0x1                 ; if al == 1
+        jne first_digit             ; jump if not equal, to first_digit
+
+    inc rcx
+    mov al, [sinput+rcx]            ; al = *(sinput+rcx), grab second digit
+    sub al, 0x30                    ; get numerical val of ascii char
+    add dl, al                      ; dl = dl + al
+    add dl, bl                      ; dl = dl + bl
+                                    ; al + bl stored in dl
+    
+    xor rax, rax                    ; rax = 0
+    xor rbx, rbx                    ; rbx = 0
+    xor rcx, rcx                    ; rcx = 0
+    
+    print_loop:
+        inc rcx                     ; rcx += 1
+        mov rax, rcx                ; rax = rcx
+
+        cmp rax, 0xA                ; if rax == 0xA
+        jge two_digit_print         ; if rax >= 0xA, its two digits and we need to print it
+
+        ; we get here if rax is NOT two digits
+        add rax, 0x30               ; rax = rax + 0x30, ie make it ascii
+        push rax                    ; save rax onto the stack
+        mov rax, rsp                 ; rax = rsp, (move stack pointer into rax)
+        call sprintLF               ; sprint + newline
+
+        pop rax                     ; restore val of rax
+        cmp rax, rdx                ; if rax == rdx (total to count to)
+        jne print_loop             ; jump if not equal, to print_loop
+    
+    pop rdx                         ; restore rdx from stack
+    pop rcx                         ; restore rcx from stack
+    pop rbx                         ; restore rbx from stack
+    pop rax                         ; restore rax from stack
+    ret                             ; return
+
+two_digit_print:
+    push rax                        ; save rax onto stack
+    push rbx                        ; save rbx onto stack
+    push rcx                        ; save rcx onto stack
+    push rdx                        ; save rdx onto stack
+
+    xor rcx, rcx                    ; rcx = 0
+
+    ten_x:
+        inc rcx                     ; rcx += 1
+        sub rax, 0xA                ; rax = rax - 0xA
+        cmp rax, 0x0                ; if rax == 0x0
+        jg ten_x                    ; jump if greater, to ten_x
+
+    add rcx, 0x30                   ; turn rcx into printable ascii char
+    mov rdx, 1                      ; forgot why
+    mov rbx, 1                      ; forgot why
+    mov rax, 4                      ; forgot why 
+    int 0x80                        ; interupt 0x80, go to kernel for sys_call
+
+    pop rdx                         ; restore rdx from stack
+    pop rcx                         ; restore rcx from stack
+    pop rbx                         ; restore rbx from stack
+    pop rax                         ; restore rax from stack
+    ret
 
 end:
     call quit

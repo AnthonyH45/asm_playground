@@ -3,8 +3,8 @@
     global _start
 
 _start:
-    mov rax, msg1                   ; rax <- msg1
-    call sprint                     ; print msg1
+    ;mov rax, msg1                   ; rax <- msg1
+    ;call sprint                     ; print msg1
 
     mov rdx, 2                      ; rdx <- 2
     mov rcx, sinput                 ; rcx <- sinput
@@ -15,14 +15,14 @@ _start:
 
     call valid_input                ; check if both chars entered are valid numbers
 
-    mov rax, msg2                   ; rax <- msg2
-    call sprint                     ; print msg2
+    ;mov rax, msg2                   ; rax <- msg2
+    ;call sprint                     ; print msg2
 
     mov rax, sinput                 ; rax <- user inputted 2 digits
     call sprint                     ; print it
 
-    mov rax, newline                ; rax <- 0xA (newline var)
-    call sprint                     ; print newline
+    ;mov rax, newline                ; rax <- 0xA (newline var)
+    ;call sprint                     ; print newline
 
     call count_to                   ; print the numbers from 1 to user_input
 

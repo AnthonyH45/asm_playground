@@ -24,7 +24,7 @@ _start:
     mov rax, newline                ; rax <- 0xA (newline var)
     call sprint                     ; print newline
 
-    ;call count_to                   ; print the numbers from 1 to user_input
+    call count_to                   ; print the numbers from 1 to user_input
 
     jmp end                         ; after returning from count_to, we jmp to end
 

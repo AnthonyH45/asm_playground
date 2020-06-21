@@ -147,8 +147,8 @@ end:
     call quit
 
     section .data
-msg1    db  'Please enter a two digit number (0x) if single digit: ', 0x0
-msg_err db  'You did not enter two digits, please try again',0xa,0x0
+msg1    db  'Please enter a two digit number (0x) if single digit: ', 0x0   ; strings gotta end with 0x0 aka \0 to print correctly
+msg_err db  'You did not enter two digits, please try again',0xa,0x0        ; 0xa = newline
 msg2    db 'Counting down from ',0x0
 newline db '',0xa,0x0
 sinput  db 1 ; db = define byte, we define 1 byte to hold a two digit number

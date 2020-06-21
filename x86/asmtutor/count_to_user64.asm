@@ -58,9 +58,9 @@ valid_input:
         ret                         ; return from call
 
 no_num:
-    mov rax, msg_err
-    call sprint
-    jmp end
+    mov rax, msg_err                ; rax = msg_err
+    call sprint                     ; print out the err msg
+    jmp end                         ; we want to quit right after
 
 count_to:
     push rax                        ; save rax onto the stack

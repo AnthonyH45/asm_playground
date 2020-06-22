@@ -3,11 +3,11 @@ Just a little place for me to practice writing some x86, x86_64, ARM, and other 
 The goal is to get a little more familiar with it so that reversing might be easier.
 Also the exercise of using my brain when not in school :)
 
-Also note that this will be using the
+Also note that this will be using the Intel syntax
 
 `opcode dest, src`
 
-syntax unless stated otherwise (ie AT&T, GNU AS or other)
+unless stated otherwise (ie AT&T, GNU AS or other)
 
 For 64 bit x86_64
 

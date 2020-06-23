@@ -48,3 +48,4 @@ Since I am on x86_64 (shown when running `uname -m`), ARM will not work, so inst
 # Currently working on section:
 - x86, going to do ARM after a few more exercises
 - still cant figure out whats wrong with the user input one that counts to double digits, thinking its something with the stack as it doesnt return properly and tries to go to invalid instructions according to gdb-peda. Maybe something is getting pushed onto the stack and not popped off, so it carries to the next function call and gets stopped there?
+- Might move to doing ARM bc i am still not sure whats wrong

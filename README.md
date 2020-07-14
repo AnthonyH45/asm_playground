@@ -43,6 +43,7 @@ Since I am on x86_64 (shown when running `uname -m`), ARM will not work, so inst
 - https://developer.arm.com/docs/dui0473/k/writing-arm-assembly-language
 - https://developer.arm.com/common-tasks/writing-arm-assembly-code/single-page
 - https://github.com/tonyOreglia/argument-counter/wiki/Using-Docker-to-Compile,-Link,-Run-and-Debug-Assembly-Language-Code
+- https://github.com/Siguza/ios-resources/blob/master/bits/arm64.md
 
 
 # Currently working on section:

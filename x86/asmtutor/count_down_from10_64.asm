@@ -12,27 +12,25 @@ _start:
 
 count_down:
     push rax
-    push rbx
     push rcx
-    push rdx
 
     xor rax, rax
-    xor rbx, rbx
     xor rcx, rcx
-    xor rdx, rdx
 
-    add rbx, 0x09
+    add rcx, 0x09
     print_loop:
-        add rax, rbx
+        mov rax, rcx
         add rax, 0x30
-        call sprint
-        dec rbx
-        cmp rbx, 0x0
+        push rax
+        mov rax, rsp
+        call sprintLF
+        pop rax
+
+        dec rcx
+        cmp rcx, 0x0
         jne print_loop
-    
-    pop rdx
+
     pop rcx
-    pop rbx
     pop rax
     ret
 

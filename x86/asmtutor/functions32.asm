@@ -62,7 +62,6 @@ sprintLF:
     pop eax             ; pop top into eax
     ret                 ; return
     
-
 ;-----------------------------------------
 ; void exit()
 ; Exit program and restore resources

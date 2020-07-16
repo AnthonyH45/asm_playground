@@ -14,8 +14,8 @@ _start:
     mov rax, 4
     int 0x80
 
-    mov rdx, 1
-    mov rcx, nine
+    mov rdx, 2
+    mov rcx, '9\0'
     mov rbx, 1
     mov rax, 4
     int 0x80

@@ -13,8 +13,14 @@ _start:
     mov rbx, 1
     mov rax, 4
     int 0x80
+
+    mov rdx, 1
+    mov rcx, nine
+    mov rbx, 1
+    mov rax, 4
+    int 0x80
     
-    call count_down
+    ;call count_down
     jmp quit
 
 
@@ -63,3 +69,4 @@ quit:
 msg1    db 'Counting down from 9',0x0
 len     equ $ - msg1
 newline db '',0xa,0x0
+nine    db '9',0x0

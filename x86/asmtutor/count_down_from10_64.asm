@@ -44,7 +44,9 @@ count_down:
             dec rcx                                 ; decrement rcx
             cmp rcx, 0x0                            ; check if its 0, set flags
             jle done_ones                           ; if rcx <= 0, jump to done_ones
+
             mov rdx, 1                              ; set the length to write to 1
+            push rcx                                ; save rcx-1
             mov rcx, plus                           ; load the plus sign into rcx to print
             mov rbx, 1                              ; write to stdout
             mov rax, 4                              ; set syscall to write
@@ -52,15 +54,7 @@ count_down:
             pop rcx                                 ; pop off stack into rcx
             jmp ones_print                          ; jmp back to ones_print
 
-        done_ones:  
-            pop rcx                                 ; pop off stack into rcx
-
-        ;add rcx, 0x30
-        ;mov rdx, 1
-        ;mov rbx, 1
-        ;mov rax, 4
-        ;int 0x80
-
+        done_ones:
         mov rdx, 1                                  ; length to print 1
         mov rcx, newline                            ; newline to print rcx
         mov rbx, 1                                  ; rbx is stdout
@@ -70,7 +64,7 @@ count_down:
         pop rcx                                     ; pop stack off into rcx
         dec rcx                                     ; decrement rcx
         cmp rcx, 0x0                                ; check if rcx is 0
-        jge print_loop                              ; if its greater then jump to print loop
+        jg print_loop                              ; if its greater then jump to print loop
 
     pop rdx                                         ; pop off stack into rdx
     pop rcx                                         ; pop off stack into rcx

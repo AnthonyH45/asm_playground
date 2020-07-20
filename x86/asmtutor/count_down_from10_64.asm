@@ -1,5 +1,6 @@
     section .text
     global _start
+    %include 'functions64.asm'
 
 _start:                                             ; entry point
     mov rdx, len                                    ; rdx <- len(msg)
@@ -31,20 +32,14 @@ count_down:
 
     add rcx, 0x09                                   ; set rcx = 9
     print_loop:
-        push rcx                                    ; save rcx to the stack
-        add rcx, 0x30                               ; make rcx ASCII printable
-        push rcx                                    ; push it onto the stack
-        mov rcx, rsp                                ; get the address of the rcx on the stack
-        call print_int                              ; call our print_int 
-        pop rcx                                     ; pop the rcx ASCII off the stack
+        mov rax, rcx                                ; move rcx into rax
+        add rax, 0x30                               ; make rax ASCII printable
+        push rax                                    ; push it onto the stack
+        mov rax, rsp                                ; get the address of the rax on the stack
+        call sprintLF
+        pop rax
 
-        mov rdx, 1                                  ; length to print 1
-        mov rcx, newline                            ; newline to print rcx
-        mov rbx, 1                                  ; rbx is stdout
-        mov rax, 4                                  ; rax is syscall, write=4
-        int 0x80                                    ; interupt to kernel
-
-        pop rcx                                     ; pop stack off into rcx
+        pop rax                                     ; pop stack off into rcx
         dec rcx                                     ; decrement rcx
         cmp rcx, 0x0                                ; check if rcx is 0
         jg print_loop                              ; if its greater then jump to print loop
@@ -54,52 +49,6 @@ count_down:
     pop rbx                                         ; pop off stack into rbx
     pop rax                                         ; pop off stack into rax
     ret                                             ; return from call 
-
-quit:
-    mov rax, 1                                      
-    int 0x80
-
-print_int:
-    call prints
-
-    push rax
-    mov rax, 0xa
-    push rax
-    mov rax, rsp
-
-; combined sprint+slen from asmtutor.com/#lesson7
-prints:
-    push rdx
-    push rcx
-    push rbx
-    push rax
-
-    push rbx
-    mov rbx, rax
-
-    next:
-        cmp byte[rax], 0x0
-        jz no_next
-        inc rax
-        jmp next
-    
-    no_next:
-        sub rax, rbx
-        pop rbx
-    
-    mov rdx, rax
-    pop rax
-
-    mov rcx, rax
-    mov rbx, 1
-    mov rax, 4
-    int 0x80
-
-    pop rbx
-    pop rcx
-    pop rdx
-    ret
-
 
     section .data
 msg1    db 'Counting down from 9',0x0

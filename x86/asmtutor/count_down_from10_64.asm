@@ -32,29 +32,12 @@ count_down:
     add rcx, 0x09                                   ; set rcx = 9
     print_loop:
         push rcx                                    ; save rcx to the stack
-        ones_print:
-            push rcx                                ; save rcx to the stack
-            mov rdx, 1                              ; load the length of the msg to print, it is one char
-            mov rcx, one                            ; move '1' into rcx
-            mov rbx, 1                              ; set fd to 1, aka stdout
-            mov rax, 4                              ; 4 = write syscall
-            int 0x80                                ; interupt to kernel
-            pop rcx                                 ; pop off stack into rcx
-            
-            dec rcx                                 ; decrement rcx
-            cmp rcx, 0x0                            ; check if its 0, set flags
-            jle done_ones                           ; if rcx <= 0, jump to done_ones
+        add rcx, 0x30                               ; make rcx ASCII printable
+        push rcx                                    ; push it onto the stack
+        mov rcx, rsp                                ; get the address of the rcx on the stack
+        call print_int                              ; call our print_int 
+        pop rcx                                     ; pop the rcx ASCII off the stack
 
-            mov rdx, 1                              ; set the length to write to 1
-            push rcx                                ; save rcx-1
-            mov rcx, plus                           ; load the plus sign into rcx to print
-            mov rbx, 1                              ; write to stdout
-            mov rax, 4                              ; set syscall to write
-            int 0x80                                ; interupt to kernel
-            pop rcx                                 ; pop off stack into rcx
-            jmp ones_print                          ; jmp back to ones_print
-
-        done_ones:
         mov rdx, 1                                  ; length to print 1
         mov rcx, newline                            ; newline to print rcx
         mov rbx, 1                                  ; rbx is stdout
@@ -75,6 +58,48 @@ count_down:
 quit:
     mov rax, 1                                      
     int 0x80
+
+print_int:
+    call prints
+
+    push rax
+    mov rax, 0xa
+    push rax
+    mov rax, rsp
+
+; combined sprint+slen from asmtutor.com/#lesson7
+prints:
+    push rdx
+    push rcx
+    push rbx
+    push rax
+
+    push rbx
+    mov rbx, rax
+
+    next:
+        cmp byte[rax], 0x0
+        jz no_next
+        inc rax
+        jmp next
+    
+    no_next:
+        sub rax, rbx
+        pop rbx
+    
+    mov rdx, rax
+    pop rax
+
+    mov rcx, rax
+    mov rbx, 1
+    mov rax, 4
+    int 0x80
+
+    pop rbx
+    pop rcx
+    pop rdx
+    ret
+
 
     section .data
 msg1    db 'Counting down from 9',0x0
